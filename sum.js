@@ -3,3 +3,5 @@ function somar(a, b){
 }
 
 console.log(somar(10, 10));
+
+module.exports = somar;
