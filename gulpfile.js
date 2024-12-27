@@ -1,5 +1,14 @@
 //Importação do pacote
 const gulp = require('gulp')
+const sass = require('gulp-sass')(require('sass'));
+
+function executeSass(){
+    return gulp.src('./source/styles/main.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('./build/styles'));
+}
+
+
 function firstFunction(callback){
     setTimeout(function(){
         console.log('Executando via Gulp');
@@ -30,4 +39,6 @@ function dizOi(callback){
 // exports.default = gulp.series(firstFunction, dizOi);
 
 //Para exporta tarefas em paralelo
-exports.default = gulp.parallel(firstFunction, dizOi);
+// exports.default = gulp.parallel(firstFunction, dizOi);
+
+exports.sass = executeSass;
