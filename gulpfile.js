@@ -9,6 +9,7 @@ function executeSass(){
 }
 
 
+
 function firstFunction(callback){
     setTimeout(function(){
         console.log('Executando via Gulp');
