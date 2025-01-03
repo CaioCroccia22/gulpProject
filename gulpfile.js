@@ -1,12 +1,22 @@
 //Importação do pacote
 const gulp = require('gulp')
 const sass = require('gulp-sass')(require('sass'));
+const sourcemaps = require('gulp-sourcemaps');
 
-function executeSass(){
+
+//Função que compila o SASS
+// Função que compila o SASS
+function executeSass() {
     return gulp.src('./source/styles/main.scss')
-        .pipe(sass())
+    .pipe(sourcemaps.init())
+        .pipe(sass({
+            // Compilação de arquivo com compressão
+            outputStyle: 'compressed'
+        }).on('error', sass.logError)) // Log de erros movido para o local correto
+        .pipe(sourcemaps.write('./maps'))//Cria o arquivo de mapeamento
         .pipe(gulp.dest('./build/styles'));
 }
+
 
 
 
