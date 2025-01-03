@@ -53,3 +53,11 @@ function dizOi(callback){
 // exports.default = gulp.parallel(firstFunction, dizOi);
 
 exports.sass = executeSass;
+
+
+exports.watch = function(){
+    gulp.watch('./source/styles/*.scss',
+        //Configuração para não ignorar a primeira execução, ou seja o executeSass
+        {ignoreInitial: false},
+        gulp.series(executeSass));
+}
