@@ -2,7 +2,8 @@
 const gulp = require('gulp')
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
-
+const uglify = require('gulp-uglify');
+const obfuscate = require('gulp-obfuscate');
 
 //Função que compila o SASS
 // Função que compila o SASS
@@ -15,6 +16,16 @@ function executeSass() {
         }).on('error', sass.logError)) // Log de erros movido para o local correto
         .pipe(sourcemaps.write('./maps'))//Cria o arquivo de mapeamento
         .pipe(gulp.dest('./build/styles'));
+}
+
+//Função que compila o JS
+function executeJS(){
+    //Passa todos os arquivos JS
+    return gulp.src('./source/scripts/*.js')
+    // Executa o plugin do gulp
+    .pipe(uglify())
+    //Pasta de destino dos arquivos ja comprimidos
+    .pipe(gulp.dest('./build/scripts'))
 }
 
 
@@ -61,3 +72,5 @@ exports.watch = function(){
         {ignoreInitial: false},
         gulp.series(executeSass));
 }
+
+exports.javascript = executeJS;
