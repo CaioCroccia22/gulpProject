@@ -4,8 +4,16 @@ const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 const obfuscate = require('gulp-obfuscate');
+const imagemin = require('gulp-imagemin');
 
-//Função que compila o SASS
+
+function compressedImage(){
+    return gulp.src('./source/img/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('./build/img'))
+}
+
+
 // Função que compila o SASS
 function executeSass() {
     return gulp.src('./source/styles/main.scss')
@@ -24,6 +32,8 @@ function executeJS(){
     return gulp.src('./source/scripts/*.js')
     // Executa o plugin do gulp
     .pipe(uglify())
+    //Ofuscação do arquivo JS
+    .pipe(obfuscate())
     //Pasta de destino dos arquivos ja comprimidos
     .pipe(gulp.dest('./build/scripts'))
 }
@@ -64,7 +74,7 @@ function dizOi(callback){
 // exports.default = gulp.parallel(firstFunction, dizOi);
 
 exports.sass = executeSass;
-
+exports.imagemin = compressedImage;
 
 exports.watch = function(){
     gulp.watch('./source/styles/*.scss',
