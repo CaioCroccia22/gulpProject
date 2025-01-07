@@ -73,14 +73,20 @@ function dizOi(callback){
 //Para exporta tarefas em paralelo
 // exports.default = gulp.parallel(firstFunction, dizOi);
 
-exports.sass = executeSass;
-exports.imagemin = compressedImage;
-
-exports.watch = function(){
+exports.default = function(){
     gulp.watch('./source/styles/*.scss',
+
         //Configuração para não ignorar a primeira execução, ou seja o executeSass
         {ignoreInitial: false},
         gulp.series(executeSass));
+
+        gulp.watch('./source/img/*',
+            {ignoreInitial: false},
+            gulp.series(compressedImage));
+
+        gulp.watch('./source/scripts/*.js',
+            
+            {ignoreInitial: false},
+            gulp.series(executeJS));
 }
 
-exports.javascript = executeJS;
